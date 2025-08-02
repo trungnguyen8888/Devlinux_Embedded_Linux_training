@@ -1,0 +1,27 @@
+.vscode/
+
+# Ignore all files that do not contain a full stop in their filename
+**/[^.]*
+
+# Ignore AsciiDoc, HTML, CSS, YML and Python files
+**/*.html
+**/*.css
+**/*.yml
+**/*.png
+**/*.adoc
+**/*.py
+
+# Important: Allow Git to traverse all directories so that the subsequent unignore (!) rules can work
+!*/
+
+# Keep Makefile at all directory levels
+!**/[Mm]akefile
+
+# Keeps source code files and text files
+!**/*.c
+!**/*.h
+!**/*.pdf
+#!**/*.py
+#!**/*.yml
+#!**/*.adoc
+#!**/*.png
