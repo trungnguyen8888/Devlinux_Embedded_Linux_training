@@ -1,0 +1,2 @@
+When execlp() is called and succeeds, it completely replaces the current process image (code, data, stack, and heap) with the new program specified in its arguments. The process keeps the same PID, but from this point on it executes the new program as if it had just started from its own main() function.
+In our case, the parent receives the execution result of the program through variable 'status'. The program then gets terminated under any circumstances.
