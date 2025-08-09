@@ -1,0 +1,5 @@
+In zombie, the child is terminated before the parent whilst the parent does not call functions like wait() to get the exit code of the child.
+Linux marks child <defunct>. This action is just to inform the parent of the status of the child termination.
+
+In orphane, the parent is terminated before the child. The child is now adopted by the process init or systemd. This allows the child to just continue running independently after its parent terminates.
+Such processes surely clean up the child when it terminates. This is to ensure no child is left without cleanup.
