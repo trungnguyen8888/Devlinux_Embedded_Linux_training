@@ -8,7 +8,6 @@
 **/*.html
 **/*.css
 **/*.yml
-**/*.py
 
 # Important: Allow Git to traverse all directories so that the subsequent unignore (!) rules can work
 !*/
@@ -20,3 +19,4 @@
 !**/*.c
 !**/*.h
 !**/*.pdf
+!**/*.py
