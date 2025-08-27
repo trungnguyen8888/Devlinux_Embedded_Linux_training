@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<title>Document</title>
+<style>
+/* Basic colors */
+.red       { color: #FF0000; }
+.green     { color: #00A651; }  /* pleasant green */
+.blue      { color: #0077FF; }
+.orange    { color: #FF7A00; }
+.purple    { color: #7A3EFF; }
+.pink      { color: #FF3E9E; }
+.teal      { color: #00B3A4; }
+.cyan      { color: #08C6F7; }
+.brown     { color: #8B572A; }
+.gray      { color: #6E6E6E; }
+.black     { color: #111111; }
+
+/* Dark variants (for emphasis) */
+.red-dark    { color: #C40000; }
+.green-dark  { color: #007A3D; }
+.blue-dark   { color: #0057B8; }
+.orange-dark { color: #CC5F00; }
+.purple-dark { color: #5A2ECC; }
+.gray-dark   { color: #444444; }
+
+/* Light variants (be careful on white backgrounds) */
+.yellow    { color: #FFC400; }  /* visible but still light */
+.gray-light{ color: #9E9E9E; }
+
+/* Text styles (optional) */
+.bold      { font-weight: bold; }
+.italic    { font-style: italic; }
+.underline { text-decoration: underline; }
+
+/* Optional “highlight” for HTML only (background color) */
+.hl-yellow { background-color: #FFF3B0; }
+.hl-blue   { background-color: #E3F2FF; }
+.hl-green  { background-color: #E6FAE9; }
+
+pre, code {
+  font-family: "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: 0.95em;
+}
+</style>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#Chapter_1">1. Overview</a>
+<ul class="sectlevel2">
+<li><a href="#Chapter_1-1">1.1. Introduction</a></li>
+<li><a href="#Chapter_1-2">1.2. References</a></li>
+<li><a href="#Chapter_1-3">1.3. Folder structure</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_2">2. Knowledge</a>
+<ul class="sectlevel2">
+<li><a href="#Chapter_2-1">2.1. C Compilation</a>
+<ul class="sectlevel3">
+<li><a href="#Chapter_2-1-1">2.1.1. Compilation flags</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_2-2">2.2. Makefile</a></li>
+<li><a href="#Chapter_2-3">2.3. The process of compiling a C program</a></li>
+<li><a href="#Chapter_2-4">2.4. Static and Shared library</a>
+<ul class="sectlevel3">
+<li><a href="#Chapter_2-4-1">2.4.1. Static library</a>
+<ul class="sectlevel4">
+<li><a href="#Chapter_2-4-1-1">2.4.1.1. Definition</a></li>
+<li><a href="#Chapter_2-4-1-2">2.4.1.2. File format</a></li>
+<li><a href="#Chapter_2-4-1-3">2.4.1.3. How to create</a></li>
+<li><a href="#Chapter_2-4-1-4">2.4.1.4. How to build an application linked with static libraries</a></li>
+<li><a href="#Chapter_2-4-1-5">2.4.1.5. How to run the application linked with static libraries</a></li>
+<li><a href="#Chapter_2-4-1-6">2.4.1.6. Pros and cons</a></li>
+<li><a href="#Chapter_2-4-1-7">2.4.1.7. When to use</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_2-4-2">2.4.2. Shared library</a>
+<ul class="sectlevel4">
+<li><a href="#Chapter_2-4-2-1">2.4.2.1. Definition</a></li>
+<li><a href="#Chapter_2-4-2-2">2.4.2.2. File format</a></li>
+<li><a href="#Chapter_2-4-2-3">2.4.2.3. How to create</a></li>
+<li><a href="#Chapter_2-4-2-4">2.4.2.4. How to build an application linked with shared libraries</a></li>
+<li><a href="#Chapter_2-4-2-5">2.4.2.5. How to run the application linked with shared libraries</a></li>
+<li><a href="#Chapter_2-4-2-6">2.4.2.6. Pros and cons</a></li>
+<li><a href="#Chapter_2-4-2-7">2.4.2.7. When to use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Chapter_3">3. Exercise</a>
+<ul class="sectlevel2">
+<li><a href="#Chapter_3-1">3.1. Exercise 1</a>
+<ul class="sectlevel3">
+<li><a href="#_source_layout">3.1.1. Source layout</a></li>
+<li><a href="#_package_the_library">3.1.2. Package the library</a></li>
+<li><a href="#_use_the_library">3.1.3. Use the library</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_3-2">3.2. Exercise 2</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_4">4. Revision history</a></li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_1"><a class="anchor" href="#Chapter_1"></a>1. Overview</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Chapter_1-1"><a class="anchor" href="#Chapter_1-1"></a>1.1. Introduction</h3>
+<div class="paragraph">
+<p>This document provides information regarding the General Knowledge lesson.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Chapter_1-2"><a class="anchor" href="#Chapter_1-2"></a>1.2. References</h3>
+<table id="table_1-1" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1-1: References</caption>
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 36.3636%;">
+<col style="width: 54.5455%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">No.</th>
+<th class="tableblock halign-left valign-top">Documents</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://drive.google.com/file/d/1s6CqxivaIEp2WT-fZStO6ujwsJrFdr2s/view">Lecture.pdf</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The lesson lecture</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="Chapter_1-3"><a class="anchor" href="#Chapter_1-3"></a>1.3. Folder structure</h3>
+<div class="paragraph">
+<p>.<br>
+├── 01_General_Knowledge<br>
+│   ├── build_doc.py<br>
+│   └── doc<br>
+├── styles.css<br>
+└── theme.yml</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_2"><a class="anchor" href="#Chapter_2"></a>2. Knowledge</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Chapter_2-1"><a class="anchor" href="#Chapter_2-1"></a>2.1. C Compilation</h3>
+<div class="sect3">
+<h4 id="Chapter_2-1-1"><a class="anchor" href="#Chapter_2-1-1"></a>2.1.1. Compilation flags</h4>
+<div class="paragraph">
+<p>This is the flag for compilation.</p>
+</div>
+<table id="table_2-1" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2-1: References</caption>
+<colgroup>
+<col style="width: 18.1818%;">
+<col style="width: 27.2727%;">
+<col style="width: 54.5455%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Purposes</th>
+<th class="tableblock halign-left valign-top">Flags</th>
+<th class="tableblock halign-left valign-top">Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="3"><div class="content"><div class="paragraph">
+<p>General Warning and Error Control</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wall</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enables a common set of important warnings about questionable code</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wextra</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enables extra warnings that are not included in -Wall</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Werror</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Treats all warnings as errors, stopping compilation if any warning appears</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><div class="content"><div class="paragraph">
+<p>Pedantic Checks</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wpedantic</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns if your code uses non-standard GNU extensions that are not in ISO C</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-pedantic-errors</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Like -Wpedantic but treats those warnings as errors</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="4"><div class="content"><div class="paragraph">
+<p>Type Conversion and Shadowing</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wshadow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns if a local variable shadows (hides) another variable with the same name from an outer scope</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wconversion</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when implicit type conversions may change a value (e.g., float to int)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wsign-conversion</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when a value changes sign due to conversion (e.g., unsigned to signed)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wcast-function-type</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when casting between incompatible function pointer types (calling such a pointer is undefined behavior)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="5"><div class="content"><div class="paragraph">
+<p>Precision and Formatting</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wdouble-promotion</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when a float is promoted to a double implicitly</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wformat=2</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enables strict format string checks for functions like printf() and scanf()</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wfloat-equal</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns on direct equality/inequality comparisons of floating‑point values (fragile due to rounding)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wformat-truncation=2</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when bounded printf‑style functions (e.g., snprintf) may truncate output (level 2 = stricter)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wformat-overflow=2</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when printf‑style formatting may overflow the destination buffer (level 2 = stricter)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="8"><div class="content"><div class="paragraph">
+<p>Memory Safety</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wnull-dereference</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when the compiler detects a dereference of a NULL pointer</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wcast-align</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns if a pointer cast results in a stricter alignment requirement</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wcast-qual</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when casting away const or volatile qualifiers</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wcast-align=strict</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Like -Wcast-align but warns whenever a cast increases the required alignment (strictest mode)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wstringop-overflow=4</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when built‑in string ops (e.g., strcpy, memcpy) may overflow the destination (level 4 = most strict)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wstringop-truncation</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when string operations may silently truncate the result</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Walloca</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns about use of alloca() (stack allocation; easy to misuse and non‑portable)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Walloc-zero</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns on zero‑size allocations (e.g., malloc(0)), which are implementation‑defined and error‑prone</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Static Analysis</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-fanalyzer</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Runs GCC’s static code analyzer to detect potential runtime bugs (e.g., NULL dereferences, memory leaks)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><div class="content"><div class="paragraph">
+<p>Optimization and Debugging</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Og</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Optimizes for debugging: keeps code easy to debug while still optimizing slightly</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-g</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Generates debug information for use with debuggers like gdb</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="19"><div class="content"><div class="paragraph">
+<p>Code Safety and Correctness</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wundef</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns if an undefined macro is used in #if or #elif without being checked with #ifdef</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wstrict-prototypes</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>In C, warns if a function is declared without specifying argument types</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wmissing-prototypes</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns if a global function is defined without a prior prototype</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wpointer-arith</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns for suspicious pointer arithmetic, like arithmetic on void*</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wwrite-strings</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Makes string literals have const type to prevent accidental modification</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wunreachable-code</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns about code that will never be executed</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wunused</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns about anything declared but never used</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wunused-parameter</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when a function parameter is unused</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-_UNUSED-but-set-variable</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when a variable is written to but its value is never read</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wlogical-op</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns about suspicious logical operations (e.g., &amp;&amp; vs &amp;, always‑true/false tests)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wduplicated-cond</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when an if/else if chain repeats the same condition</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wduplicated-branches</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when different branches contain identical code</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wstrict-overflow=5</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when the compiler assumes signed overflow is undefined and optimizes based on that (level 5 = most strict)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Woverflow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns about compile‑time constant arithmetic that overflows the destination type</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wredundant-decls</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when an entity is declared multiple times in the same scope</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wnested-externs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns on extern declarations placed inside functions (confusing linkage/style)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wmissing-noreturn</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when a function that never returns should be marked _Noreturn</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Wmissing-declarations</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when a global function is defined without a prior prototype in a header</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-Winline</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Warns when a function marked/expected to inline is not inlined (e.g., too large/complex)</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Chapter_2-2"><a class="anchor" href="#Chapter_2-2"></a>2.2. Makefile</h3>
+<div class="paragraph">
+<p>Please refer to section 1 of [<strong><a href="#table_1-1">1</a></strong>].</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="Chapter_2-3"><a class="anchor" href="#Chapter_2-3"></a>2.3. The process of compiling a C program</h3>
+<div class="paragraph">
+<p>Please refer to section 2 of [<strong><a href="#table_1-1">1</a></strong>].</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="Chapter_2-4"><a class="anchor" href="#Chapter_2-4"></a>2.4. Static and Shared library</h3>
+<div class="sect3">
+<h4 id="Chapter_2-4-1"><a class="anchor" href="#Chapter_2-4-1"></a>2.4.1. Static library</h4>
+<div class="sect4">
+<h5 id="Chapter_2-4-1-1"><a class="anchor" href="#Chapter_2-4-1-1"></a>2.4.1.1. Definition</h5>
+<div class="paragraph">
+<p>A static library (known as <code>archive</code>) is a collection of object files that are linked into a program (the main program) at compile time. After resolving the various functions references from the main program to the modules in the static library, the linker extracts copies of the required object modules from the library and copies these into the resulting executable file.</p>
+</div>
+<div id="figure_2-1" class="imageblock text-center">
+<div class="content">
+<img src="/home/nguyendang/Study/Devlinux_Embedded_Linux_training/01_General_Knowledge/doc/images/Static_library.png" alt="Static library">
+</div>
+</div>
+<div class="paragraph text-center">
+<p><em>Figure 2-1: Relationship between programs and a static library</em></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-1-2"><a class="anchor" href="#Chapter_2-4-1-2"></a>2.4.1.2. File format</h5>
+<div class="paragraph">
+<p>Static libraries typically have a <span class="font-courier">.a</span> file extension in Linux.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-1-3"><a class="anchor" href="#Chapter_2-4-1-3"></a>2.4.1.3. How to create</h5>
+<div class="paragraph">
+<p>Building a static library involves three steps: source (<span class="font-courier">.c</span>) &#8594; object (<span class="font-courier">.o</span>) &#8594; archive (<span class="font-courier">.a</span>).</p>
+</div>
+<div id="Chapter_2-4-1-3_Step_1" class="paragraph">
+<p><strong>Step 1</strong>: Create object (<span class="font-courier">.o</span>) files:</p>
+</div>
+<div class="paragraph">
+<p>Please run this command to make the required object file for shared library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>gcc &lt;build flags&gt; -c                            \
+&#160;&#160;&#160;&#160;&lt;path to lib source 1&gt;/&lt;lib source 1&gt;.c   \
+&#160;&#160;&#160;&#160;&lt;path to lib source 2&gt;/&lt;lib source 2&gt;.c   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&lt;path to lib source n&gt;/&lt;lib source n&gt;.c   \
+&#160;&#160;&#160;&#160;-o &lt;path to lib object&gt;/&lt;lib object&gt;.o</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whereas,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">&lt;build flags&gt;</span>: Compiler options listed in <a href="#Chapter_2-1-1">Compilation flags</a>. These options are optional.</p>
+</li>
+<li>
+<p><span class="font-courier">-c</span>: A mandatory option which specifies source files.</p>
+</li>
+<li>
+<p><span class="font-courier">-o</span>: An option followed by <span class="font-courier">&lt;path to lib object&gt;/&lt;lib object&gt;.o</span> to specify both the directory and the name of the generated object file. In the context of this document, using this option is mandatory to ensure the output file&#8217;s type.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After running that command, you will have the object file <span class="font-courier">&lt;lib object&gt;.o</span> in <span class="font-courier">&lt;path to lib object&gt;</span>.</p>
+</div>
+<div id="Chapter_2-4-1-3_Step_2" class="paragraph">
+<p><strong>Step 2</strong>: Create a static library:</p>
+</div>
+<div class="paragraph">
+<p>You can have multiple object files (<span class="font-courier">.o</span>) built in <a href="#Chapter_2-4-1-3_Step_1">Step 1</a>. Please run this command below in a terminal to create the static library from your object files.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>ar rcs &lt;path to static library&gt;/&lt;library&gt;.a               \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;path to object 1&gt;/&lt;object 1&gt;.o   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;path to object 2&gt;/&lt;object 2&gt;.o   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;path to object n&gt;/&lt;object n&gt;.o</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whereas,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">ar</span>: Command to make a static library.</p>
+</li>
+<li>
+<p><span class="font-courier">rcs</span>: Options for <span class="font-courier">ar</span>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">r</span> (replace): Insert the object files into the archive. If files with the same name already exist in the archive, they are replaced with the new ones.</p>
+</li>
+<li>
+<p><span class="font-courier">c</span> (create): Create the archive if it does not already exist.</p>
+</li>
+<li>
+<p><span class="font-courier">s</span> (index): Write an index (also called a "symbol table") into the archive. This index speeds up linking because the linker can quickly find which object files define which symbols.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then, you will have your static library called <span class="font-courier">&lt;library&gt;.a</span> in <span class="font-courier">&lt;path to static library&gt;</span>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-1-4"><a class="anchor" href="#Chapter_2-4-1-4"></a>2.4.1.4. How to build an application linked with static libraries</h5>
+<div class="paragraph">
+<p>Once you have your static library in <span class="font-courier">&lt;path to static library&gt;</span>, and your source files <span class="font-courier">&lt;source file x&gt;</span> (<span class="font-courier">x</span> = 1, 2, &#8230;&#8203;, n) in their respective directories <span class="font-courier">&lt;path to source file x&gt;</span>, let&#8217;s just create the executable file linked with the static library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>gcc &lt;build flags&gt;                            \
+&#160;&#160;&#160;&#160;&lt;path to app source 1&gt;/&lt;app source 1&gt;.c   \
+&#160;&#160;&#160;&#160;&lt;path to app source 2&gt;/&lt;app source 2&gt;.c   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&lt;path to app source n&gt;/&lt;app source n&gt;.c   \
+&#160;&#160;&#160;&#160;-L&lt;path to static library&gt;                \
+&#160;&#160;&#160;&#160;-l&lt;library&gt;                               \
+&#160;&#160;&#160;&#160;-o &lt;path to output executable&gt;/&lt;executable file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whereas,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">&lt;build flags&gt;</span>: Compiler options listed in <a href="#Chapter_2-1-1">Compilation flags</a>. These options are optional.</p>
+</li>
+<li>
+<p><span class="font-courier">-L</span>: An option which specifies a directory for the linker to search for required libraries. If you have more than just one directory, you should use several <span class="font-courier">-L</span> to specify them. This option is optional but highly recommended in our case. If it is omitted or the linker fails to find the required library in the directories specified by this option, then the linker will search the standard system library directories (such as <span class="font-courier">/lib</span> and <span class="font-courier">/usr/lib</span>, etc.).</p>
+</li>
+<li>
+<p><span class="font-courier">-l</span>: An option which specifies a library by name. If you need to link multiple libraries, you should use multiple <span class="font-courier">-l</span> options, each of which is preceded by the appropriate <span class="font-courier">-L&lt;directories&gt;</span> to tell the linker where to search. This option is convenient but optional: if you do not use <span class="font-courier">-l</span>, you can still link by explicitly writing the full static library filename <span class="font-courier">&lt;library&gt;.a</span>.</p>
+</li>
+<li>
+<p><span class="font-courier">-o</span>: An option followed by <span class="font-courier">&lt;path to output executable&gt;/&lt;executable file&gt;</span> to specify both the directory and the name of the generated executable file. In the context of this document, using this option is mandatory in order to explicitly control the output location and filename.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After running that command, you will have the executable file <span class="font-courier">&lt;executable file&gt;</span> in <span class="font-courier">&lt;path to output executable&gt;</span>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In the directories searched by the linker, if both a static library and a shared library with the same name are present and the full filename is not specified explicitly, the shared library has higher priority and will be linked by default.</p>
+</div>
+<div class="paragraph">
+<p>You can instruct the linker explicitly with these options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">-Wl,-Bstatic -l&lt;library&gt;</span>: Tell the linker to use the static version (<span class="font-courier">lib&lt;library&gt;.a</span>).</p>
+</li>
+<li>
+<p><span class="font-courier">-Wl,-Bdynamic -l&lt;library&gt;</span>: Tell the linker to use the shared library (<span class="font-courier">lib&lt;library&gt;.so</span>).</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-1-5"><a class="anchor" href="#Chapter_2-4-1-5"></a>2.4.1.5. How to run the application linked with static libraries</h5>
+<div class="paragraph">
+<p>You can simply run the application by executing this command in a terminal.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>&lt;path to output executable&gt;/&lt;executable file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whereas, <span class="font-courier">&lt;path to output executable&gt;</span> and <span class="font-courier">&lt;executable file&gt;</span> are defined in <a href="#Chapter_2-4-1-4">How to build an application linked with static libraries</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you receive a message which says 'Permission denied' then you should change the permission of the application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>chmod +x &lt;path to output executable&gt;/&lt;executable file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then run the application again, it should work.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-1-6"><a class="anchor" href="#Chapter_2-4-1-6"></a>2.4.1.6. Pros and cons</h5>
+<div class="paragraph">
+<p>Static library has some pros and cons mentioned as below.</p>
+</div>
+<div class="paragraph">
+<p><strong>Pros</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Performance</strong>: Since the library is included in the executable, there is no overhead of dynamic linking at runtime. Therefore, better performance is likely to be gained.</p>
+</li>
+<li>
+<p><strong>Portability</strong>: The executable can run on any system without needing the library file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Cons</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Size</strong>: The executable can become larger since it contains all the library code.</p>
+</li>
+<li>
+<p><strong>Updates</strong>: If the library is updated, the executable must be recompiled to use the new version.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-1-7"><a class="anchor" href="#Chapter_2-4-1-7"></a>2.4.1.7. When to use</h5>
+<div class="paragraph">
+<p>With those pros and cons mentioned in <a href="#Chapter_2-4-1-6">Pros and cons</a>, these usages can be considered:</p>
+</div>
+<div class="paragraph">
+<p><strong>When code is stable and reused across many programs</strong>:</p>
+</div>
+<div class="paragraph">
+<p>If you have a set of utility functions (e.g., math routines, string processing, logging) which rarely change, you can compile them once into a static library (<span class="font-courier">.a</span> file) and reuse them across multiple projects.</p>
+</div>
+<div class="paragraph">
+<p><strong>When you want self-contained executables</strong>:</p>
+</div>
+<div class="paragraph">
+<p>With a static library, the linker copies the required object code into the final executable. This means:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No need to ship external <span class="font-courier">.so</span> (shared library) files.</p>
+</li>
+<li>
+<p>The program can run even on systems that do not have the library installed.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is useful for embedded systems or distributing a single portable binary.</p>
+</div>
+<div class="paragraph">
+<p><strong>When performance and startup speed matter</strong>:</p>
+</div>
+<div class="paragraph">
+<p>Since the linker resolves everything at compile time:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The program does not need to resolve symbols at runtime.</p>
+</li>
+<li>
+<p>Startup is usually faster compared to dynamically linking against shared libraries.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>When library versioning is not a concern</strong>:</p>
+</div>
+<div class="paragraph">
+<p>A static library “freezes” the code inside your executable.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Advantage</strong>: your program will not break if someone upgrades or removes a system library.</p>
+</li>
+<li>
+<p><strong>Disadvantage</strong>: if a bug or security issue is fixed in the library, you need to recompile your executable to include the fix.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Chapter_2-4-2"><a class="anchor" href="#Chapter_2-4-2"></a>2.4.2. Shared library</h4>
+<div class="sect4">
+<h5 id="Chapter_2-4-2-1"><a class="anchor" href="#Chapter_2-4-2-1"></a>2.4.2.1. Definition</h5>
+<div class="paragraph">
+<p>A shared library is a collection of compiled object files that is stored in a single file and loaded into memory at runtime so that multiple programs can use its functions and data simultaneously.</p>
+</div>
+<div class="paragraph">
+<p>During linking, the linker does not copy the code from the shared library into the executable; instead, it records the library’s name in the <span class="font-courier">DT_NEEDED</span> entry of the ELF dynamic section. When the executable is loaded into memory, the dynamic linker reads this information, searches for the corresponding shared library file, and maps it into the process address space.</p>
+</div>
+<div class="paragraph">
+<p>At that point, the unresolved symbols in the executable — such as functions and global variables — are resolved by assigning them actual memory addresses within the loaded shared library, allowing the program to call the library code as if it were part of the executable itself.</p>
+</div>
+<div id="figure_2-2" class="imageblock text-center">
+<div class="content">
+<img src="/home/nguyendang/Study/Devlinux_Embedded_Linux_training/01_General_Knowledge/doc/images/Shared_library.png" alt="Shared library">
+</div>
+</div>
+<div class="paragraph text-center">
+<p><em>Figure 2-2: Relationship between programs and a shared library</em></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-2-2"><a class="anchor" href="#Chapter_2-4-2-2"></a>2.4.2.2. File format</h5>
+<div class="paragraph">
+<p>Shared libraries typically have a <span class="font-courier">.so</span> in their file extension in Linux. For examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">libm.so</span> (math library)</p>
+</li>
+<li>
+<p><span class="font-courier">libc.so.6</span> (GNU C library)</p>
+</li>
+<li>
+<p><span class="font-courier">libpthread.so.0</span> (POSIX threads)</p>
+</li>
+<li>
+<p><span class="font-courier">.so.&lt;version&gt;</span> like <span class="font-courier">libabc.so.1</span>, <span class="font-courier">libabc.so.1.2.3</span>, etc.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-2-3"><a class="anchor" href="#Chapter_2-4-2-3"></a>2.4.2.3. How to create</h5>
+<div class="paragraph">
+<p>Building a shared library involves three steps: source (<span class="font-courier">.c</span>) &#8594; object (<span class="font-courier">.o</span>) &#8594; shared library.</p>
+</div>
+<div id="Chapter_2-4-2-3_Step_1" class="paragraph">
+<p><strong>Step 1</strong>: Create object (<span class="font-courier">.o</span>) files:</p>
+</div>
+<div class="paragraph">
+<p>Please run this command to make the required object file for shared library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>gcc &lt;build flags&gt; -fPIC -c                      \
+&#160;&#160;&#160;&#160;&lt;path to lib source 1&gt;/&lt;lib source 1&gt;.c   \
+&#160;&#160;&#160;&#160;&lt;path to lib source 2&gt;/&lt;lib source 2&gt;.c   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&lt;path to lib source n&gt;/&lt;lib source n&gt;.c   \
+&#160;&#160;&#160;&#160;-o &lt;path to lib object&gt;/&lt;lib object&gt;.o</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whereas,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">&lt;build flags&gt;</span>: Compiler options listed in <a href="#Chapter_2-1-1">Compilation flags</a>. These options are optional.</p>
+</li>
+<li>
+<p><span class="font-courier">-fPIC</span>: PIC stands for Position-Independent Code. This option tells the compiler to generate a machine code which is independent of fixed memory addresses. This is crucial for creating a shared library.</p>
+</li>
+<li>
+<p>For other options, please refer to <a href="#Chapter_2-4-1-3_Step_1">Create object file for static library</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After running that command, you will have the object file <span class="font-courier">&lt;lib object&gt;.o</span> in <span class="font-courier">&lt;path to lib object&gt;</span>.</p>
+</div>
+<div id="Chapter_2-4-2-3_Step_2" class="paragraph">
+<p><strong>Step 2</strong>: Create a shared library:</p>
+</div>
+<div class="paragraph">
+<p>You can have multiple object files (<span class="font-courier">.o</span>) built in <a href="#Chapter_2-4-2-3_Step_1">Step 1</a>. Please run this command below in a terminal to create the shared library from your object files.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>gcc -shared -o &lt;path to shared library&gt;/&lt;library&gt;.so      \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;path to object 1&gt;/&lt;object 1&gt;.o   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;path to object 2&gt;/&lt;object 2&gt;.o   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;path to object n&gt;/&lt;object n&gt;.o</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whereas,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">-shared</span>: This option tells the linker to create a shared library rather than an executable file. This option is mandatory.</p>
+</li>
+<li>
+<p><span class="font-courier">-o</span>: An option followed by <span class="font-courier">&lt;path to shared library&gt;/&lt;library&gt;.so</span> to specify both the directory and the name of the generated shared library file. In the context of this document, using this option is mandatory in order to explicitly control the output location and filename.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then, you will have your shared library called <span class="font-courier">&lt;library&gt;.so</span> in <span class="font-courier">&lt;path to shared library&gt;</span>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-2-4"><a class="anchor" href="#Chapter_2-4-2-4"></a>2.4.2.4. How to build an application linked with shared libraries</h5>
+<div class="paragraph">
+<p>Once you have your shared library in <span class="font-courier">&lt;path to shared library&gt;</span>, and your source files <span class="font-courier">&lt;source file x&gt;</span> (<span class="font-courier">x</span>: 1, 2, &#8230;&#8203;, n) in their respective directories <span class="font-courier">&lt;path to source file x&gt;</span>, let&#8217;s just create the executable file linked with the shared library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>gcc &lt;build flags&gt;                               \
+&#160;&#160;&#160;&#160;&lt;path to app source 1&gt;/&lt;app source 1&gt;.c   \
+&#160;&#160;&#160;&#160;&lt;path to app source 2&gt;/&lt;app source 2&gt;.c   \
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.
+&#160;&#160;&#160;&#160;&lt;path to app source n&gt;/&lt;app source n&gt;.c   \
+&#160;&#160;&#160;&#160;-L&lt;path to shared library&gt;                \
+&#160;&#160;&#160;&#160;-l&lt;library&gt;                               \
+&#160;&#160;&#160;&#160;-o &lt;path to output executable&gt;/&lt;executable file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For all the options, please refer to <a href="#Chapter_2-4-1-4">How to build an application linked with static libraries</a>.</p>
+</div>
+<div class="paragraph">
+<p>After running that command, you will have the executable file <span class="font-courier">&lt;executable file&gt;</span> in <span class="font-courier">&lt;path to output executable&gt;</span>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-2-5"><a class="anchor" href="#Chapter_2-4-2-5"></a>2.4.2.5. How to run the application linked with shared libraries</h5>
+<div class="paragraph">
+<p>At run time, the dynamic linker searches for the shared library in directories whose priorities are listed in descending order, as shown in the table below.</p>
+</div>
+<table id="table_2-2" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2-2: Searched directories of descending priorities</caption>
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">No.</th>
+<th class="tableblock halign-left valign-top">Directories</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The actual directories recorded in <span class="font-courier">DT_NEEDED</span> in the executable file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The directory specified in <span class="font-courier">DT_RPATH</span> or <span class="font-courier">DT_RUNPATH</span> (if present in the executable file)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The environmental variable <span class="font-courier">LD_LIBRARY_PATH</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system cache <span class="font-courier">/etc/ld.so.cache</span> (generated by <span class="font-courier">ldconfig</span>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard system library directories (such as <span class="font-courier">/lib</span>, <span class="font-courier">/usr/lib</span>, <span class="font-courier">/usr/local/lib</span>, etc.)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For (2) in the <a href="#table_2-2">Table 2-2</a>, you can add this option <span class="font-courier">-Wl,-rpath,&lt;path to shared library&gt;</span> to the build command line in <a href="#Chapter_2-4-2-4">How to build an application linked with shared libraries</a>.</p>
+</div>
+<div class="paragraph">
+<p>For (3), you have to set the environmental variable <span class="font-courier">LD_LIBRARY_PATH</span> before running the application in the same terminal.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>export LD_LIBRARY_PATH=&lt;path to shared library&gt;:${LD_LIBRARY_PATH}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Execute this command to run the application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>&lt;path to output executable&gt;/&lt;executable file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Whereas, <span class="font-courier">&lt;path to output executable&gt;</span> and <span class="font-courier">&lt;executable file&gt;</span> are defined in <a href="#Chapter_2-4-2-4">How to build an application linked with shared libraries</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you receive a message which says 'Permission denied' then you should change the permission of the application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>chmod +x &lt;path to output executable&gt;/&lt;executable file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then run the application again, it should work.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-2-6"><a class="anchor" href="#Chapter_2-4-2-6"></a>2.4.2.6. Pros and cons</h5>
+<div class="paragraph">
+<p>Shared library has some pros and cons mentioned as below.</p>
+</div>
+<div class="paragraph">
+<p><strong>Pros</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Size</strong>: The executable is smaller because it does not contain the actual library code, only references to it.</p>
+</li>
+<li>
+<p><strong>Updates</strong>: If the library is updated (e.g., bug fixes, security patches), the executable can immediately benefit without recompilation.</p>
+</li>
+<li>
+<p><strong>Memory efficiency</strong>: Multiple processes can share the same copy of the library in memory, reducing overall memory usage on the system.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Cons</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Performance</strong>: There is a small runtime overhead due to dynamic linking and symbol resolution.</p>
+</li>
+<li>
+<p><strong>Dependency</strong>: The executable requires the shared library file to be present on the target system; if the library is missing or has an incompatible version, the program cannot run.</p>
+</li>
+<li>
+<p><strong>Complexity</strong>: Managing library versions (SONAME, symlinks) and ensuring compatibility across different systems can add complexity.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect4">
+<h5 id="Chapter_2-4-2-7"><a class="anchor" href="#Chapter_2-4-2-7"></a>2.4.2.7. When to use</h5>
+<div class="paragraph">
+<p>With those pros and cons mentioned in <a href="#Chapter_2-4-2-6">Pros and cons</a>, these usages can be considered:</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple programs need the same functionality</strong>:</p>
+</div>
+<div class="paragraph">
+<p>If several executables depend on the same library, using a shared library reduces duplication of code in each binary.</p>
+</div>
+<div class="paragraph">
+<p><strong>You want to minimize executable size</strong>:</p>
+</div>
+<div class="paragraph">
+<p>Since the executable only contains references to the library, it remains smaller compared to linking the same code statically.</p>
+</div>
+<div class="paragraph">
+<p><strong>Ease of updates and maintenance</strong>:</p>
+</div>
+<div class="paragraph">
+<p>Updating the shared library (for bug fixes, new features, or security patches) immediately benefits all dependent programs, without the need to recompile them.</p>
+</div>
+<div class="paragraph">
+<p><strong>Memory efficiency</strong>:</p>
+</div>
+<div class="paragraph">
+<p>When multiple processes run simultaneously, they can share the same copy of the library code in memory, lowering overall memory usage.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_3"><a class="anchor" href="#Chapter_3"></a>3. Exercise</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Building and Using static &amp; shared libraries in C.</p>
+</div>
+<div class="paragraph">
+<p>In C programming, as a project grows, organizing source code into reusable modules is crucial. A library lets us package a set of related functions to share across multiple projects without copying source code.</p>
+</div>
+<div class="paragraph">
+<p>Static library (<span class="font-courier">.a</span>): The library’s code is copied and embedded directly into your executable at compile time. The executable is larger but runs independently.</p>
+</div>
+<div class="paragraph">
+<p>Shared library (<span class="font-courier">.so</span> — Shared Object): The library’s code is not embedded into the executable. Instead, the OS loads the library into memory at runtime, and multiple programs can share it.</p>
+</div>
+<div class="sect2">
+<h3 id="Chapter_3-1"><a class="anchor" href="#Chapter_3-1"></a>3.1. Exercise 1</h3>
+<div class="paragraph">
+<p>Build a String Utilities Library (<span class="font-courier">strutils</span>).</p>
+</div>
+<div class="sect3">
+<h4 id="_source_layout"><a class="anchor" href="#_source_layout"></a>3.1.1. Source layout</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">strutils.h</span>: Declares the functions provided by the library, for example:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">str_reverse</span>: Reverses a string in place.</p>
+</li>
+<li>
+<p><span class="font-courier">str_trim</span>: Removes leading and trailing whitespace from a string.</p>
+</li>
+<li>
+<p><span class="font-courier">str_to_int</span>: Safely converts a string to an integer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><span class="font-courier">bstrutils.c</span>: Source implementing the functions declared in <span class="font-courier">strutils.h</span>.</p>
+</li>
+<li>
+<p><span class="font-courier">main.c</span>: A small program to test the <span class="font-courier">strutils</span> library functions.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_package_the_library"><a class="anchor" href="#_package_the_library"></a>3.1.2. Package the library</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Build a static library: <span class="font-courier">libstrutils.a</span>.</p>
+</li>
+<li>
+<p>Build a shared library: <span class="font-courier">libstrutils.so</span>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_use_the_library"><a class="anchor" href="#_use_the_library"></a>3.1.3. Use the library</h4>
+<div class="paragraph">
+<p>Write a main program to test the <span class="font-courier">strutils</span> functions. Compile and link:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With static library:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>gcc main.c -L. -lstrutils -o main_static</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With shared library:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>gcc main.c -L. -lstrutils -o main_shared</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To execute main_shared, you must tell the OS where to find the <span class="font-courier">.so</span> file (hint: use the <span class="font-courier">LD_LIBRARY_PATH</span> environment variable).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Chapter_3-2"><a class="anchor" href="#Chapter_3-2"></a>3.2. Exercise 2</h3>
+<div class="paragraph">
+<p>Automate with a <span class="font-courier">Makefile</span>.</p>
+</div>
+<div class="paragraph">
+<p>Create a <span class="font-courier">Makefile</span> to automate all steps above, including these targets:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="font-courier">all</span>: Default target; builds both <span class="font-courier">main_static</span> and <span class="font-courier">main_shared</span>.</p>
+</li>
+<li>
+<p><span class="font-courier">static</span>: Builds only <span class="font-courier">libstrutils.a</span> and <span class="font-courier">main_static</span>.</p>
+</li>
+<li>
+<p><span class="font-courier">shared</span>: Builds only <span class="font-courier">libstrutils.so</span> and <span class="font-courier">main_shared</span>.</p>
+</li>
+<li>
+<p><span class="font-courier">clean</span>: Removes all build artifacts (<span class="font-courier">.o</span>, <span class="font-courier">.a</span>, <span class="font-courier">.so</span>, and executables).</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_4"><a class="anchor" href="#Chapter_4"></a>4. Revision history</h2>
+<div class="sectionbody">
+<table id="table_4-1" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Version</th>
+<th class="tableblock halign-left valign-top">Date</th>
+<th class="tableblock halign-left valign-top">Chapter</th>
+<th class="tableblock halign-left valign-top">Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aug 23rd, 2025</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Newly created</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">0.02</p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">Aug 24th, 2025</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Chapter_2-4-1-5">Chapter 2.4.1.5</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a new chapter that provides guidance on running the application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Chapter_2-4-1-4">Chapter 2.4.1.4</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add note about library priority</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2025-08-24 17:59:52 +0700
+</div>
+</div>
+</body>
+</html>

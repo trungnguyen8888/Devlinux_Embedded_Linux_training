@@ -1,0 +1,143 @@
+extends: default
+
+#------------------------------------------------------------
+# Common color definitions (for reuse in table, heading, etc.)
+#------------------------------------------------------------
+colors:
+  black:       '#111111'
+  white:       '#FFFFFF'
+  gray:        '#6E6E6E'
+  gray-dark:   '#444444'
+  gray-light:  '#9E9E9E'
+
+  red:         '#FF0000'
+  red-dark:    '#C40000'
+  green:       '#00A651'
+  green-dark:  '#007A3D'
+  blue:        '#0077FF'
+  blue-dark:   '#0057B8'
+  orange:      '#FF7A00'
+  orange-dark: '#CC5F00'
+  purple:      '#7A3EFF'
+  purple-dark: '#5A2ECC'
+  pink:        '#FF3E9E'
+  teal:        '#00B3A4'
+  cyan:        '#08C6F7'
+  yellow:      '#FFC400'
+  brown:       '#8B572A'
+
+#------------------------------------------------------------
+# Inline roles for colored/styled text in PDF
+# Usage: [.red]#text#, [.blue-dark]#text#, etc.
+#------------------------------------------------------------
+role:
+  red:         { font_color: FF0000 }
+  green:       { font_color: 00A651 }
+  blue:        { font_color: 0077FF }
+  orange:      { font_color: FF7A00 }
+  purple:      { font_color: 7A3EFF }
+  pink:        { font_color: FF3E9E }
+  teal:        { font_color: 00B3A4 }
+  cyan:        { font_color: 08C6F7 }
+  brown:       { font_color: 8B572A }
+  gray:        { font_color: 6E6E6E }
+  black:       { font_color: 111111 }
+
+  red-dark:    { font_color: C40000 }
+  green-dark:  { font_color: 007A3D }
+  blue-dark:   { font_color: 0057B8 }
+  orange-dark: { font_color: CC5F00 }
+  purple-dark: { font_color: 5A2ECC }
+  gray-dark:   { font_color: 444444 }
+
+  yellow:      { font_color: FFC400 }
+  gray-light:  { font_color: 9E9E9E }
+
+  # Text styles to combine with colors if needed:
+  bold:        { font_style: bold }
+  italic:      { font_style: italic }
+  underline:   { text_decoration: underline }
+
+  # Font lists:
+  font-courier:
+    font_family: Courier
+    font_size: 12
+
+#------------------------------------------------------------
+# Table styling
+#------------------------------------------------------------
+table:
+  border-color: $colors-black
+  grid-color:   $colors-black
+  border-width: 2
+  grid-width:   0.5
+  caption:
+    text-align: center
+  body:
+    text-align: left
+
+#------------------------------------------------------------
+# Code styling - for [source] format
+#------------------------------------------------------------
+code:
+  font-family: "Courier"
+  font-size: 12
+
+#------------------------------------------------------------
+# Heading styles (chapter/section titles)
+#------------------------------------------------------------
+heading:
+  h1-font-size: 24
+  h2-font-size: 22
+  h3-font-size: 20
+  h4-font-size: 18
+  h5-font-size: 16
+  h6-font-size: 14
+
+#------------------------------------------------------------
+# Admonitions (NOTE / TIP / IMPORTANT / CAUTION / WARNING)
+#------------------------------------------------------------
+admonition:
+  # Common frame and background for all admonitions
+  border-width: 1
+  border-color: $colors-gray-light
+  background-color: $colors-white
+  padding: [10, 12, 10, 12]
+
+  # Label text style (e.g., NOTE, TIP, IMPORTANT)
+  label:
+    font_style: bold
+    font_color: $colors-blue-dark   # default color (can be overridden per type below)
+
+  # Icons and label colors for each admonition type (requires :icons: font)
+  icon:
+    note:
+      name: info-circle
+      stroke_color: $colors-blue
+      size: 18
+      label:
+        font_color: $colors-blue
+    tip:
+      name: lightbulb-o
+      stroke_color: $colors-green
+      size: 18
+      label:
+        font_color: $colors-green
+    important:
+      name: exclamation-circle
+      stroke_color: $colors-red-dark
+      size: 18
+      label:
+        font_color: $colors-red-dark
+    caution:
+      name: fire
+      stroke_color: $colors-orange-dark
+      size: 18
+      label:
+        font_color: $colors-orange-dark
+    warning:
+      name: exclamation-triangle
+      stroke_color: $colors-yellow
+      size: 18
+      label:
+        font_color: $colors-yellow

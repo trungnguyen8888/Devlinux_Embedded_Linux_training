@@ -1,0 +1,39 @@
+/* Basic colors */
+.red       { color: #FF0000; }
+.green     { color: #00A651; }  /* pleasant green */
+.blue      { color: #0077FF; }
+.orange    { color: #FF7A00; }
+.purple    { color: #7A3EFF; }
+.pink      { color: #FF3E9E; }
+.teal      { color: #00B3A4; }
+.cyan      { color: #08C6F7; }
+.brown     { color: #8B572A; }
+.gray      { color: #6E6E6E; }
+.black     { color: #111111; }
+
+/* Dark variants (for emphasis) */
+.red-dark    { color: #C40000; }
+.green-dark  { color: #007A3D; }
+.blue-dark   { color: #0057B8; }
+.orange-dark { color: #CC5F00; }
+.purple-dark { color: #5A2ECC; }
+.gray-dark   { color: #444444; }
+
+/* Light variants (be careful on white backgrounds) */
+.yellow    { color: #FFC400; }  /* visible but still light */
+.gray-light{ color: #9E9E9E; }
+
+/* Text styles (optional) */
+.bold      { font-weight: bold; }
+.italic    { font-style: italic; }
+.underline { text-decoration: underline; }
+
+/* Optional “highlight” for HTML only (background color) */
+.hl-yellow { background-color: #FFF3B0; }
+.hl-blue   { background-color: #E3F2FF; }
+.hl-green  { background-color: #E6FAE9; }
+
+pre, code {
+  font-family: "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: 0.95em;
+}
