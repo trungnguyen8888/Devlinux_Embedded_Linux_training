@@ -1,0 +1,52 @@
+:chapter_num: 3
+:image_num: 0
+:table_num: 0
+:icons: font
+
+[[Chapter_3]]
+== Exercise
+
+*File Metadata Inspector*
+
+Every file and directory on a Linux filesystem not only contains data but also carries a large amount of metadata, stored in a structure called an inode. Metadata includes:
+
+* File type
+* Size
+* Permissions
+* Ownership information
+* Important timestamps
+
+System calls from the [.font-courier]#stat()# family are the most accurate and efficient way for a C program to access this information without having to parse the output of shell commands such as [.font-courier]#ls -l#.
+
+In this exercise, you will build a small command-line tool named [.font-courier]#filestat#, similar to the existing stat command in Linux, to read and display the key information of any given file.
+
+[[Chapter_3-1]]
+=== Exercise 1
+
+Write the program [.font-courier]#filestat.c#:
+
+. The program must accept exactly one command-line argument: the path to a file or directory.
+. If no argument is provided, print usage instructions (for example: `Usage: ./filestat <file_path>`) and exit.
+. Use the system call [.font-courier]#lstat()# to retrieve information about the object at the given path and store it in a [.font-courier]#struct stat# variable.
+. The output must include the following:
+
+* *File Path*: The path entered by the user.
+* *File Type*: The type of the object. You must detect and display at least three main types:
+** *Regular File*
+** *Directory*
+** *Symbolic Link*
+
+[NOTE]
+====
+*Hint*: Use the macros [.font-courier]#S_ISREG()#, [.font-courier]#S_ISDIR()#, [.font-courier]#S_ISLNK()# from [.font-courier]#<sys/stat.h># to check the [.font-courier]#st_mode# field.
+====
+
+* *Size*: The file size, retrieved from the [.font-courier]#st_size# field (displayed with the unit *bytes*).
+* *Last Modified*: The last modification time of the file.
+** Retrieve the [.font-courier]#time_t# value from the [.font-courier]#st_mtime# field.
+** Convert this timestamp into a human-readable date and time string.
+
+[NOTE]
+====
+*Hint*: Use the functions [.font-courier]#ctime()# or [.font-courier]#strftime()# from [.font-courier]#<time.h># to format the time.
+====

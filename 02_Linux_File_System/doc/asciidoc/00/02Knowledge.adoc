@@ -1,0 +1,28 @@
+:chapter_num: 2
+:image_num: 0
+:table_num: 0
+:figure-caption-position: below
+:tabs: {nbsp}{nbsp}{nbsp}{nbsp}
+:icons: font
+
+[[Chapter_2]]
+== Knowledge
+
+[[Chapter_2-1]]
+=== File in Linux
+
+*The Phisolophy of Linux*: Everything is a file.
+
+image::File_properties.png[id=figure_{chapter_num}-{counter:image_num},align=center]
+[.text-center]
+_Figure {chapter_num}-{counter:image_num}: File properties_
+
+Types of files in Linux:
+
+* *Regular file*: Standard files such as text files or executable files.
+* *Directory file*: A file that contains a list of other files (i.e., a folder).
+* *Character device file*: A special file that represents character-based devices.
+* *Block device file*: A special file that represents block-based devices.
+* *Link file*: A file that represents (or points to) another file.
+* *Socket file*: A file that represents a socket.
+* *Pipe file*: A file that represents a pipe (used for inter-process communication).
