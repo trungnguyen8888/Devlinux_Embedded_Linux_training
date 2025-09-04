@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<title>Document</title>
+<style>
+/* Basic colors */
+.red       { color: #FF0000; }
+.green     { color: #00A651; }  /* pleasant green */
+.blue      { color: #0077FF; }
+.orange    { color: #FF7A00; }
+.purple    { color: #7A3EFF; }
+.pink      { color: #FF3E9E; }
+.teal      { color: #00B3A4; }
+.cyan      { color: #08C6F7; }
+.brown     { color: #8B572A; }
+.gray      { color: #6E6E6E; }
+.black     { color: #111111; }
+
+/* Dark variants (for emphasis) */
+.red-dark    { color: #C40000; }
+.green-dark  { color: #007A3D; }
+.blue-dark   { color: #0057B8; }
+.orange-dark { color: #CC5F00; }
+.purple-dark { color: #5A2ECC; }
+.gray-dark   { color: #444444; }
+
+/* Light variants (be careful on white backgrounds) */
+.yellow    { color: #FFC400; }  /* visible but still light */
+.gray-light{ color: #9E9E9E; }
+
+/* Text styles (optional) */
+.bold      { font-weight: bold; }
+.italic    { font-style: italic; }
+.underline { text-decoration: underline; }
+
+/* Optional “highlight” for HTML only (background color) */
+.hl-yellow { background-color: #FFF3B0; }
+.hl-blue   { background-color: #E3F2FF; }
+.hl-green  { background-color: #E6FAE9; }
+
+pre, code {
+  font-family: "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: 0.95em;
+}
+</style>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#Chapter_1">1. Overview</a>
+<ul class="sectlevel2">
+<li><a href="#Chapter_1-1">1.1. Introduction</a></li>
+<li><a href="#Chapter_1-2">1.2. References</a></li>
+<li><a href="#Chapter_1-3">1.3. Environment</a></li>
+<li><a href="#Chapter_1-4">1.4. Folder structure</a></li>
+<li><a href="#Chapter_1-5">1.5. Glossary</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_2">2. Knowledge</a>
+<ul class="sectlevel2">
+<li><a href="#Chapter_2-1">2.1. File in Linux</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_3">3. Exercise</a>
+<ul class="sectlevel2">
+<li><a href="#Chapter_3-1">3.1. Exercise 1</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_4">4. Solution notes</a>
+<ul class="sectlevel2">
+<li><a href="#Chapter_4-1">4.1. C Compilation</a></li>
+</ul>
+</li>
+<li><a href="#Chapter_5">5. Revision history</a></li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_1"><a class="anchor" href="#Chapter_1"></a>1. Overview</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Chapter_1-1"><a class="anchor" href="#Chapter_1-1"></a>1.1. Introduction</h3>
+<div class="paragraph">
+<p>This document provides information regarding the Linux Filesystem lesson.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Chapter_1-2"><a class="anchor" href="#Chapter_1-2"></a>1.2. References</h3>
+<table id="table_1-1" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1-1: References</caption>
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 36.3636%;">
+<col style="width: 54.5455%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">No.</th>
+<th class="tableblock halign-left valign-top">Documents</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://drive.google.com/file/d/1bLUuumX-n_kjslrsvR0UmxV51bHuxsGY/view">02_Linux_File_System.pdf</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The lesson lecture</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="Chapter_1-3"><a class="anchor" href="#Chapter_1-3"></a>1.3. Environment</h3>
+<table id="table_1-2" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1-2: Environment</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ubuntu</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">22.04.5 LTS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kernel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linux kernel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6.8.0-65-generic</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GNU C Compiler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GCC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11.4.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Build operation tool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GNU Make</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="Chapter_1-4"><a class="anchor" href="#Chapter_1-4"></a>1.4. Folder structure</h3>
+<div class="paragraph">
+<p>Below is the folder tree.</p>
+</div>
+<div id="figure_1-1" class="imageblock text-center">
+<div class="content">
+<img src="/home/nguyendang/Study/Devlinux_Embedded_Linux_training/04_Linux_Thread/Exercise_3/doc/images/Tree.png" alt="Tree">
+</div>
+</div>
+<div class="paragraph text-center">
+<p><em>Figure 1-1: Folder tree</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Chapter_1-5"><a class="anchor" href="#Chapter_1-5"></a>1.5. Glossary</h3>
+<table id="table_1-3" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1-3: Glossary</caption>
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 85.7143%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Abbr.</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ELF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executable and Linkable Format</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_2"><a class="anchor" href="#Chapter_2"></a>2. Knowledge</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Chapter_2-1"><a class="anchor" href="#Chapter_2-1"></a>2.1. File in Linux</h3>
+<div class="paragraph">
+<p><strong>The Phisolophy of Linux</strong>: Everything is a file.</p>
+</div>
+<div id="figure_2-1" class="imageblock text-center">
+<div class="content">
+<img src="/home/nguyendang/Study/Devlinux_Embedded_Linux_training/04_Linux_Thread/Exercise_3/doc/images/File_properties.png" alt="File properties">
+</div>
+</div>
+<div class="paragraph text-center">
+<p><em>Figure 2-1: File properties</em></p>
+</div>
+<div class="paragraph">
+<p>Types of files in Linux:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Regular file</strong>: Standard files such as text files or executable files.</p>
+</li>
+<li>
+<p><strong>Directory file</strong>: A file that contains a list of other files (i.e., a folder).</p>
+</li>
+<li>
+<p><strong>Character device file</strong>: A special file that represents character-based devices.</p>
+</li>
+<li>
+<p><strong>Block device file</strong>: A special file that represents block-based devices.</p>
+</li>
+<li>
+<p><strong>Link file</strong>: A file that represents (or points to) another file.</p>
+</li>
+<li>
+<p><strong>Socket file</strong>: A file that represents a socket.</p>
+</li>
+<li>
+<p><strong>Pipe file</strong>: A file that represents a pipe (used for inter-process communication).</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_3"><a class="anchor" href="#Chapter_3"></a>3. Exercise</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>File Metadata Inspector</strong></p>
+</div>
+<div class="paragraph">
+<p>Every file and directory on a Linux filesystem not only contains data but also carries a large amount of metadata, stored in a structure called an inode. Metadata includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>File type</p>
+</li>
+<li>
+<p>Size</p>
+</li>
+<li>
+<p>Permissions</p>
+</li>
+<li>
+<p>Ownership information</p>
+</li>
+<li>
+<p>Important timestamps</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>System calls from the <span class="font-courier">stat()</span> family are the most accurate and efficient way for a C program to access this information without having to parse the output of shell commands such as <span class="font-courier">ls -l</span>.</p>
+</div>
+<div class="paragraph">
+<p>In this exercise, you will build a small command-line tool named <span class="font-courier">filestat</span>, similar to the existing stat command in Linux, to read and display the key information of any given file.</p>
+</div>
+<div class="sect2">
+<h3 id="Chapter_3-1"><a class="anchor" href="#Chapter_3-1"></a>3.1. Exercise 1</h3>
+<div class="paragraph">
+<p>Write the program <span class="font-courier">filestat.c</span>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The program must accept exactly one command-line argument: the path to a file or directory.</p>
+</li>
+<li>
+<p>If no argument is provided, print usage instructions (for example: <code>Usage: ./filestat &lt;file_path&gt;</code>) and exit.</p>
+</li>
+<li>
+<p>Use the system call <span class="font-courier">lstat()</span> to retrieve information about the object at the given path and store it in a <span class="font-courier">struct stat</span> variable.</p>
+</li>
+<li>
+<p>The output must include the following:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>File Path</strong>: The path entered by the user.</p>
+</li>
+<li>
+<p><strong>File Type</strong>: The type of the object. You must detect and display at least three main types:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Regular File</strong></p>
+</li>
+<li>
+<p><strong>Directory</strong></p>
+</li>
+<li>
+<p><strong>Symbolic Link</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Hint</strong>: Use the macros <span class="font-courier">S_ISREG()</span>, <span class="font-courier">S_ISDIR()</span>, <span class="font-courier">S_ISLNK()</span> from <span class="font-courier">&lt;sys/stat.h&gt;</span> to check the <span class="font-courier">st_mode</span> field.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Size</strong>: The file size, retrieved from the <span class="font-courier">st_size</span> field (displayed with the unit <strong>bytes</strong>).</p>
+</li>
+<li>
+<p><strong>Last Modified</strong>: The last modification time of the file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Retrieve the <span class="font-courier">time_t</span> value from the <span class="font-courier">st_mtime</span> field.</p>
+</li>
+<li>
+<p>Convert this timestamp into a human-readable date and time string.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Hint</strong>: Use the functions <span class="font-courier">ctime()</span> or <span class="font-courier">strftime()</span> from <span class="font-courier">&lt;time.h&gt;</span> to format the time.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_4"><a class="anchor" href="#Chapter_4"></a>4. Solution notes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This chapter provide notes and information about the solutions to <a href="#Chapter_3">Exercise</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="Chapter_4-1"><a class="anchor" href="#Chapter_4-1"></a>4.1. C Compilation</h3>
+<div class="paragraph">
+<p>The following table lists all compiler options used in the solutions.</p>
+</div>
+<table id="table_4-1" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4-1: C complier options used</caption>
+<colgroup>
+<col style="width: 15.3846%;">
+<col style="width: 30.7692%;">
+<col style="width: 53.8462%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">General Warning and Error Control</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wall</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables a common set of important warnings about questionable code</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wextra</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables extra warnings that are not included in -Wall</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Werror</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Treats all warnings as errors, stopping compilation if any warning appears</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">Pedantic Checks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wpedantic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns if your code uses non-standard GNU extensions that are not in ISO C</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-pedantic-errors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Like -Wpedantic but treats those warnings as errors</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock">Type Conversion and Shadowing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wshadow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns if a local variable shadows (hides) another variable with the same name from an outer scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wconversion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when implicit type conversions may change a value (e.g., float to int)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wsign-conversion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when a value changes sign due to conversion (e.g., unsigned to signed)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wcast-function-type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when casting between incompatible function pointer types (calling such a pointer is undefined behavior)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="5"><p class="tableblock">Precision and Formatting</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wdouble-promotion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when a float is promoted to a double implicitly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wformat=2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables strict format string checks for functions like printf() and scanf()</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wfloat-equal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns on direct equality/inequality comparisons of floating‑point values (fragile due to rounding)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wformat-truncation=2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when bounded printf‑style functions (e.g., snprintf) may truncate output (level 2 = stricter)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wformat-overflow=2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when printf‑style formatting may overflow the destination buffer (level 2 = stricter)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="8"><p class="tableblock">Memory Safety</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wnull-dereference</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when the compiler detects a dereference of a NULL pointer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wcast-align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns if a pointer cast results in a stricter alignment requirement</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wcast-qual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when casting away const or volatile qualifiers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wcast-align=strict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Like -Wcast-align but warns whenever a cast increases the required alignment (strictest mode)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wstringop-overflow=4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when built‑in string ops (e.g., strcpy, memcpy) may overflow the destination (level 4 = most strict)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wstringop-truncation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when string operations may silently truncate the result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Walloca</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns about use of alloca() (stack allocation; easy to misuse and non‑portable)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Walloc-zero</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns on zero‑size allocations (e.g., malloc(0)), which are implementation‑defined and error‑prone</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Static Analysis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-fanalyzer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs GCC’s static code analyzer to detect potential runtime bugs (e.g., NULL dereferences, memory leaks)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">Optimization and Debugging</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Og</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optimizes for debugging: keeps code easy to debug while still optimizing slightly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-g</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generates debug information for use with debuggers like gdb</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="19"><p class="tableblock">Code Safety and Correctness</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wundef</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns if an undefined macro is used in #if or #elif without being checked with #ifdef</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wstrict-prototypes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In C, warns if a function is declared without specifying argument types</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wmissing-prototypes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns if a global function is defined without a prior prototype</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wpointer-arith</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns for suspicious pointer arithmetic, like arithmetic on void*</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wwrite-strings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Makes string literals have const type to prevent accidental modification</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wunreachable-code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns about code that will never be executed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wunused</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns about anything declared but never used</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wunused-parameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when a function parameter is unused</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wunused-but-set-variable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when a variable is written to but its value is never read</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wlogical-op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns about suspicious logical operations (e.g., &amp;&amp; vs &amp;, always‑true/false tests)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wduplicated-cond</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when an if/else if chain repeats the same condition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wduplicated-branches</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when different branches contain identical code</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wstrict-overflow=5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when the compiler assumes signed overflow is undefined and optimizes based on that (level 5 = most strict)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Woverflow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns about compile‑time constant arithmetic that overflows the destination type</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wredundant-decls</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when an entity is declared multiple times in the same scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wnested-externs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns on extern declarations placed inside functions (confusing linkage/style)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wmissing-noreturn</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when a function that never returns should be marked _Noreturn</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Wmissing-declarations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when a global function is defined without a prior prototype in a header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-Winline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warns when a function marked/expected to inline is not inlined (e.g., too large/complex)</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Chapter_5"><a class="anchor" href="#Chapter_5"></a>5. Revision history</h2>
+<div class="sectionbody">
+<table id="table_5-1" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Version</th>
+<th class="tableblock halign-left valign-top">Date</th>
+<th class="tableblock halign-left valign-top">Chapter</th>
+<th class="tableblock halign-left valign-top">Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sep 3rd, 2025</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Newly created</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2025-09-04 21:20:41 +0700
+</div>
+</div>
+</body>
+</html>
