@@ -1,0 +1,407 @@
+:chapter_num: 2
+:image_num: 0
+:table_num: 0
+:figure-caption-position: below
+:tabs: {nbsp}{nbsp}{nbsp}{nbsp}
+:icons: font
+
+[[Chapter_2]]
+== Knowledge
+
+[[Chapter_2-1]]
+=== Makefile
+
+Please refer to section 1 of [*<<table_1-1, 1>>*].
+
+<<<
+
+[[Chapter_2-2]]
+=== The process of compiling a C program
+
+Please refer to section 2 of [*<<table_1-1, 1>>*].
+
+<<<
+
+[[Chapter_2-3]]
+=== Static and Shared library
+[[Chapter_2-3-1]]
+==== Static library
+[[Chapter_2-3-1-1]]
+===== Definition
+
+A static library (known as `archive`) is a collection of object files that are linked into a program (the main program) at compile time. After resolving the various functions references from the main program to the modules in the static library, the linker extracts copies of the required object modules from the library and copies these into the resulting executable file.
+
+image::Static_library.png[id=figure_{chapter_num}-{counter:image_num},align=center]
+[.text-center]
+_Figure {chapter_num}-{counter:image_num}: Relationship between programs and a static library_
+
+<<<
+
+[[Chapter_2-3-1-2]]
+===== File format
+
+Static libraries typically have a [.font-courier]#.a# file extension in Linux.
+
+<<<
+
+[[Chapter_2-3-1-3]]
+===== How to create
+
+Building a static library involves three steps: source ([.font-courier]#.c#) -> object ([.font-courier]#.o#) -> archive ([.font-courier]#.a#).
+
+[[Chapter_2-3-1-3_Step_1]]
+*Step 1*: Create object ([.font-courier]#.o#) files:
+
+Please run this command to make the required object file for shared library.
+
+[source, subs="+attributes,+macros"]
+----
+gcc <build flags> -c                            \
+{tabs}<path to lib source 1>/<lib source 1>.c   \
+{tabs}<path to lib source 2>/<lib source 2>.c   \
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}<path to lib source n>/<lib source n>.c   \
+{tabs}-o <path to lib object>/<lib object>.o
+----
+
+Whereas,
+
+* [.font-courier]#<build flags>#: Compiler options, such as -Wall, -O2, etc. These options are optional.
+* [.font-courier]#-c#: A mandatory option which specifies source files.
+* [.font-courier]#-o#: An option followed by [.font-courier]#<path to lib object>/<lib object>.o# to specify both the directory and the name of the generated object file. In the context of this document, using this option is mandatory to ensure the output file's type.
+
+After running that command, you will have the object file [.font-courier]#<lib object>.o# in [.font-courier]#<path to lib object>#.
+
+[[Chapter_2-3-1-3_Step_2]]
+*Step 2*: Create a static library:
+
+You can have multiple object files ([.font-courier]#.o#) built in <<Chapter_2-3-1-3_Step_1, Step 1>>. Please run this command below in a terminal to create the static library from your object files.
+
+[source, subs="+attributes,+macros"]
+----
+ar rcs <path to static library>/<library>.a               \
+{tabs}{nbsp}{nbsp}{nbsp}<path to object 1>/<object 1>.o   \
+{tabs}{nbsp}{nbsp}{nbsp}<path to object 2>/<object 2>.o   \
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{nbsp}{nbsp}{nbsp}<path to object n>/<object n>.o
+----
+
+Whereas,
+
+* [.font-courier]#ar#: Command to make a static library.
+* [.font-courier]#rcs#: Options for [.font-courier]#ar#:
+** [.font-courier]#r# (replace): Insert the object files into the archive. If files with the same name already exist in the archive, they are replaced with the new ones.
+** [.font-courier]#c# (create): Create the archive if it does not already exist.
+** [.font-courier]#s# (index): Write an index (also called a "symbol table") into the archive. This index speeds up linking because the linker can quickly find which object files define which symbols.
+
+Then, you will have your static library called [.font-courier]#<library>.a# in [.font-courier]#<path to static library>#.
+
+<<<
+
+[[Chapter_2-3-1-4]]
+===== How to build an application linked with static libraries
+
+Once you have your static library in [.font-courier]#<path to static library>#, and your source files [.font-courier]#<source file x># ([.font-courier]#x# = 1, 2, ..., n) in their respective directories [.font-courier]#<path to source file x>#, let's just create the executable file linked with the static library.
+
+[source, subs="+attributes,+macros"]
+----
+gcc <build flags>                            \
+{tabs}<path to app source 1>/<app source 1>.c   \
+{tabs}<path to app source 2>/<app source 2>.c   \
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}<path to app source n>/<app source n>.c   \
+{tabs}-L<path to static library>                \
+{tabs}-l<library>                               \
+{tabs}-o <path to output executable>/<executable file>
+----
+
+Whereas,
+
+* [.font-courier]#<build flags>#: Compiler options, such as -Wall, -O2, etc. These options are optional.
+* [.font-courier]#-L#: An option which specifies a directory for the linker to search for required libraries. If you have more than just one directory, you should use several [.font-courier]#-L# to specify them. This option is optional but highly recommended in our case. If it is omitted or the linker fails to find the required library in the directories specified by this option, then the linker will search the standard system library directories (such as [.font-courier]#/lib# and [.font-courier]#/usr/lib#, etc.). 
+* [.font-courier]#-l#: An option which specifies a library by name. If you need to link multiple libraries, you should use multiple [.font-courier]#-l# options, each of which is preceded by the appropriate [.font-courier]#-L<directories># to tell the linker where to search. This option is convenient but optional: if you do not use [.font-courier]#-l#, you can still link by explicitly writing the full static library filename [.font-courier]#<library>.a#.
+* [.font-courier]#-o#: An option followed by [.font-courier]#<path to output executable>/<executable file># to specify both the directory and the name of the generated executable file. In the context of this document, using this option is mandatory in order to explicitly control the output location and filename.
+
+After running that command, you will have the executable file [.font-courier]#<executable file># in [.font-courier]#<path to output executable>#.
+
+[NOTE]
+====
+In the directories searched by the linker, if both a static library and a shared library with the same name are present and the full filename is not specified explicitly, the shared library has higher priority and will be linked by default.
+
+You can instruct the linker explicitly with these options:
+
+* [.font-courier]#-Wl,-Bstatic -l<library>#: Tell the linker to use the static version ([.font-courier]#lib<library>.a#).
+* [.font-courier]#-Wl,-Bdynamic -l<library>#: Tell the linker to use the shared library ([.font-courier]#lib<library>.so#).
+====
+
+<<<
+
+[[Chapter_2-3-1-5]]
+===== How to run the application linked with static libraries
+
+You can simply run the application by executing this command in a terminal.
+
+[source, subs="+attributes,+macros"]
+----
+xref:Chapter_2-3-1-4[<path to output executable>]/xref:Chapter_2-3-1-4[<executable file>]
+----
+
+If you receive a message which says 'Permission denied' then you should change the permission of the application.
+
+[source, subs="+attributes,+macros"]
+----
+chmod +x xref:Chapter_2-3-1-4[<path to output executable>]/xref:Chapter_2-3-1-4[<executable file>]
+----
+
+Then run the application again, it should work.
+
+<<<
+
+[[Chapter_2-3-1-6]]
+===== Pros and cons
+
+Static library has some pros and cons mentioned as below.
+
+*Pros*:
+
+* *Performance*: Since the library is included in the executable, there is no overhead of dynamic linking at runtime. Therefore, better performance is likely to be gained.
+* *Portability*: The executable can run on any system without needing the library file.
+
+*Cons*:
+
+* *Size*: The executable can become larger since it contains all the library code.
+* *Updates*: If the library is updated, the executable must be recompiled to use the new version.
+
+<<<
+
+[[Chapter_2-3-1-7]]
+===== When to use
+
+With those pros and cons mentioned in <<Chapter_2-3-1-6, Pros and cons>>, these usages can be considered:
+
+*When code is stable and reused across many programs*:
+
+If you have a set of utility functions (e.g., math routines, string processing, logging) which rarely change, you can compile them once into a static library ([.font-courier]#.a# file) and reuse them across multiple projects.
+
+*When you want self-contained executables*:
+
+With a static library, the linker copies the required object code into the final executable. This means:
+
+* No need to ship external [.font-courier]#.so# (shared library) files.
+* The program can run even on systems that do not have the library installed.
+
+This is useful for embedded systems or distributing a single portable binary.
+
+*When performance and startup speed matter*:
+
+Since the linker resolves everything at compile time:
+
+* The program does not need to resolve symbols at runtime.
+* Startup is usually faster compared to dynamically linking against shared libraries.
+
+*When library versioning is not a concern*:
+
+A static library “freezes” the code inside your executable.
+
+* *Advantage*: your program will not break if someone upgrades or removes a system library.
+* *Disadvantage*: if a bug or security issue is fixed in the library, you need to recompile your executable to include the fix.
+
+<<<
+
+[[Chapter_2-3-2]]
+==== Shared library
+[[Chapter_2-3-2-1]]
+===== Definition
+
+A shared library is a collection of compiled object files that is stored in a single file and loaded into memory at runtime so that multiple programs can use its functions and data simultaneously.
+
+During linking, the linker does not copy the code from the shared library into the executable; instead, it records the library’s name in the [.font-courier]#DT_NEEDED# entry of the ELF dynamic section. When the executable is loaded into memory, the dynamic linker reads this information, searches for the corresponding shared library file, and maps it into the process address space.
+
+At that point, the unresolved symbols in the executable — such as functions and global variables — are resolved by assigning them actual memory addresses within the loaded shared library, allowing the program to call the library code as if it were part of the executable itself.
+
+image::Shared_library.png[id=figure_{chapter_num}-{counter:image_num},align=center]
+[.text-center]
+_Figure {chapter_num}-{counter:image_num}: Relationship between programs and a shared library_
+
+<<<
+
+[[Chapter_2-3-2-2]]
+===== File format
+
+Shared libraries typically have a [.font-courier]#.so# in their file extension in Linux. For examples:
+
+* [.font-courier]#libm.so# (math library)
+* [.font-courier]#libc.so.6# (GNU C library)
+* [.font-courier]#libpthread.so.0# (POSIX threads)
+* [.font-courier]#.so.<version># like [.font-courier]#libabc.so.1#, [.font-courier]#libabc.so.1.2.3#, etc.
+
+<<<
+
+[[Chapter_2-3-2-3]]
+===== How to create
+
+Building a shared library involves three steps: source ([.font-courier]#.c#) -> object ([.font-courier]#.o#) -> shared library.
+
+[[Chapter_2-3-2-3_Step_1]]
+*Step 1*: Create object ([.font-courier]#.o#) files:
+
+Please run this command to make the required object file for shared library.
+
+[source, subs="+attributes,+macros"]
+----
+gcc <build flags> -fPIC -c                      \
+{tabs}<path to lib source 1>/<lib source 1>.c   \
+{tabs}<path to lib source 2>/<lib source 2>.c   \
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}<path to lib source n>/<lib source n>.c   \
+{tabs}-o <path to lib object>/<lib object>.o
+----
+
+Whereas,
+
+* [.font-courier]#<build flags>#: Compiler options, such as -Wall, -O2, etc. These options are optional.
+* [.font-courier]#-fPIC#: PIC stands for Position-Independent Code. This option tells the compiler to generate a machine code which is independent of fixed memory addresses. This is crucial for creating a shared library.
+* For other options, please refer to <<Chapter_2-3-1-3_Step_1, Create object file for static library>>.
+
+After running that command, you will have the object file [.font-courier]#<lib object>.o# in [.font-courier]#<path to lib object>#.
+
+[[Chapter_2-3-2-3_Step_2]]
+*Step 2*: Create a shared library:
+
+You can have multiple object files ([.font-courier]#.o#) built in <<Chapter_2-3-2-3_Step_1, Step 1>>. Please run this command below in a terminal to create the shared library from your object files.
+
+[source, subs="+attributes,+macros"]
+----
+gcc -shared -o <path to shared library>/<library>.so      \
+{tabs}{nbsp}{nbsp}{nbsp}<path to object 1>/<object 1>.o   \
+{tabs}{nbsp}{nbsp}{nbsp}<path to object 2>/<object 2>.o   \
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{nbsp}{nbsp}{nbsp}<path to object n>/<object n>.o
+----
+
+Whereas,
+
+* [.font-courier]#-shared#: This option tells the linker to create a shared library rather than an executable file. This option is mandatory.
+* [.font-courier]#-o#: An option followed by [.font-courier]#<path to shared library>/<library>.so# to specify both the directory and the name of the generated shared library file. In the context of this document, using this option is mandatory in order to explicitly control the output location and filename.
+
+Then, you will have your shared library called [.font-courier]#<library>.so# in [.font-courier]#<path to shared library>#.
+
+<<<
+
+[[Chapter_2-3-2-4]]
+===== How to build an application linked with shared libraries
+
+Once you have your shared library in [.font-courier]#xref:Chapter_2-3-2-3_Step_2[<path to shared library>]#, and your source files [.font-courier]#<source file x># ([.font-courier]#x#: 1, 2, ..., n) in their respective directories [.font-courier]#<path to source file x>#, let's just create the executable file linked with the shared library.
+
+[source, subs="+attributes,+macros"]
+----
+gcc <build flags>                               \
+{tabs}<path to app source 1>/<app source 1>.c   \
+{tabs}<path to app source 2>/<app source 2>.c   \
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}{tabs}{tabs}{tabs}{tabs}{tabs}.
+{tabs}<path to app source n>/<app source n>.c   \
+{tabs}-L<path to shared library>                \
+{tabs}-l<library>                               \
+{tabs}-o <path to output executable>/<executable file>
+----
+
+For all the options, please refer to <<Chapter_2-3-1-4, How to build an application linked with static libraries>>.
+
+After running that command, you will have the executable file [.font-courier]#<executable file># in [.font-courier]#<path to output executable>#.
+
+<<<
+
+[[Chapter_2-3-2-5]]
+===== How to run the application linked with shared libraries
+
+At run time, the dynamic linker searches for the shared library in directories whose priorities are listed in descending order, as shown in the table below.
+
+[title=": Searched directories of descending priorities", caption="Table {chapter_num}-{counter:table_num}", id=table_2-1, cols="1,9", align=center]
+|=================
+|No.|Directory
+
+|1|The actual directories recorded in [.font-courier]#DT_NEEDED# in the executable file
+|2|The directory specified in [.font-courier]#DT_RPATH# or [.font-courier]#DT_RUNPATH# (if present in the executable file)
+|3|The environmental variable [.font-courier]#LD_LIBRARY_PATH#
+|4|The system cache [.font-courier]#/etc/ld.so.cache# (generated by [.font-courier]#ldconfig#)
+|5|Standard system library directories (such as [.font-courier]#/lib#, [.font-courier]#/usr/lib#, [.font-courier]#/usr/local/lib#, etc.)
+|=================
+
+For (2) in the <<table_2-1, Table 2-1>>, you can add this option [.font-courier]#-Wl,-rpath,xref:Chapter_2-3-2-3_Step_2[<path to shared library>]# to the build command line in <<Chapter_2-3-2-4, How to build an application linked with shared libraries>>.
+
+For (3), you have to set the environmental variable [.font-courier]#LD_LIBRARY_PATH# before running the application in the same terminal.
+
+[source, subs="+attributes,+macros"]
+----
+export LD_LIBRARY_PATH=xref:Chapter_2-3-2-3_Step_2[<path to shared library>]:${LD_LIBRARY_PATH}
+----
+
+Execute this command to run the application.
+
+[source, subs="+attributes,+macros"]
+----
+xref:Chapter_2-3-2-4[<path to output executable>]/xref:Chapter_2-3-2-4[<executable file>]
+----
+
+If you receive a message which says 'Permission denied' then you should change the permission of the application.
+
+[source, subs="+attributes,+macros"]
+----
+chmod +x xref:Chapter_2-3-2-4[<path to output executable>]/xref:Chapter_2-3-2-4[<executable file>]
+----
+
+Then run the application again, it should work.
+
+<<<
+
+[[Chapter_2-3-2-6]]
+===== Pros and cons
+
+Shared library has some pros and cons mentioned as below.
+
+*Pros*:
+
+* *Size*: The executable is smaller because it does not contain the actual library code, only references to it.
+* *Updates*: If the library is updated (e.g., bug fixes, security patches), the executable can immediately benefit without recompilation.
+* *Memory efficiency*: Multiple processes can share the same copy of the library in memory, reducing overall memory usage on the system.
+
+*Cons*:
+
+* *Performance*: There is a small runtime overhead due to dynamic linking and symbol resolution.
+* *Dependency*: The executable requires the shared library file to be present on the target system; if the library is missing or has an incompatible version, the program cannot run.
+* *Complexity*: Managing library versions (SONAME, symlinks) and ensuring compatibility across different systems can add complexity.
+
+<<<
+
+[[Chapter_2-3-2-7]]
+===== When to use
+
+With those pros and cons mentioned in <<Chapter_2-3-2-6, Pros and cons>>, these usages can be considered:
+
+*Multiple programs need the same functionality*:
+
+If several executables depend on the same library, using a shared library reduces duplication of code in each binary.
+
+*You want to minimize executable size*:
+
+Since the executable only contains references to the library, it remains smaller compared to linking the same code statically.
+
+*Ease of updates and maintenance*:
+
+Updating the shared library (for bug fixes, new features, or security patches) immediately benefits all dependent programs, without the need to recompile them.
+
+*Memory efficiency*:
+
+When multiple processes run simultaneously, they can share the same copy of the library code in memory, lowering overall memory usage.

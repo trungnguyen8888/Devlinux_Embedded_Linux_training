@@ -1,0 +1,79 @@
+:chapter_num: 4
+:image_num: 0
+:table_num: 0
+:icons: font
+
+[[Chapter_4]]
+== Solution notes
+
+This chapter provide notes and information about the solutions to <<Chapter_3, Exercise>>.
+
+[[Chapter_4-1]]
+=== C Compilation
+
+The following table lists all compiler options used in the solutions.
+
+[title=": C complier options used", options="header", caption="Table {chapter_num}-{counter:table_num}", id=table_4-1, cols="2,4,7", align=center]
+|=================
+|Purpose|Option|Description
+
+.3+|General Warning and Error Control
+|-Wall|Enables a common set of important warnings about questionable code
+|-Wextra|Enables extra warnings that are not included in -Wall
+|-Werror|Treats all warnings as errors, stopping compilation if any warning appears
+
+.2+|Pedantic Checks
+|-Wpedantic|Warns if your code uses non-standard GNU extensions that are not in ISO C
+|-pedantic-errors|Like -Wpedantic but treats those warnings as errors
+
+.4+|Type Conversion and Shadowing
+|-Wshadow|Warns if a local variable shadows (hides) another variable with the same name from an outer scope
+|-Wconversion|Warns when implicit type conversions may change a value (e.g., float to int)
+|-Wsign-conversion|Warns when a value changes sign due to conversion (e.g., unsigned to signed)
+|-Wcast-function-type|Warns when casting between incompatible function pointer types (calling such a pointer is undefined behavior)
+
+.5+|Precision and Formatting
+|-Wdouble-promotion|Warns when a float is promoted to a double implicitly
+|-Wformat=2|Enables strict format string checks for functions like printf() and scanf()
+|-Wfloat-equal|Warns on direct equality/inequality comparisons of floating‑point values (fragile due to rounding)
+|-Wformat-truncation=2|Warns when bounded printf‑style functions (e.g., snprintf) may truncate output (level 2 = stricter)
+|-Wformat-overflow=2|Warns when printf‑style formatting may overflow the destination buffer (level 2 = stricter)
+
+.8+|Memory Safety
+|-Wnull-dereference|Warns when the compiler detects a dereference of a NULL pointer
+|-Wcast-align|Warns if a pointer cast results in a stricter alignment requirement
+|-Wcast-qual|Warns when casting away const or volatile qualifiers
+|-Wcast-align=strict|Like -Wcast-align but warns whenever a cast increases the required alignment (strictest mode)
+|-Wstringop-overflow=4|Warns when built‑in string ops (e.g., strcpy, memcpy) may overflow the destination (level 4 = most strict)
+|-Wstringop-truncation|Warns when string operations may silently truncate the result
+|-Walloca|Warns about use of alloca() (stack allocation; easy to misuse and non‑portable)
+|-Walloc-zero|Warns on zero‑size allocations (e.g., malloc(0)), which are implementation‑defined and error‑prone
+
+.1+|Static Analysis
+|-fanalyzer|Runs GCC’s static code analyzer to detect potential runtime bugs (e.g., NULL dereferences, memory leaks)
+
+.2+|Optimization and Debugging
+|-Og|Optimizes for debugging: keeps code easy to debug while still optimizing slightly
+|-g|Generates debug information for use with debuggers like gdb
+
+.19+|Code Safety and Correctness
+|-Wundef|Warns if an undefined macro is used in #if or #elif without being checked with #ifdef
+|-Wstrict-prototypes|In C, warns if a function is declared without specifying argument types
+|-Wmissing-prototypes|Warns if a global function is defined without a prior prototype
+|-Wpointer-arith|Warns for suspicious pointer arithmetic, like arithmetic on void*
+|-Wwrite-strings|Makes string literals have const type to prevent accidental modification
+|-Wunreachable-code|Warns about code that will never be executed
+|-Wunused|Warns about anything declared but never used
+|-Wunused-parameter|Warns when a function parameter is unused
+|-Wunused-but-set-variable|Warns when a variable is written to but its value is never read
+|-Wlogical-op|Warns about suspicious logical operations (e.g., && vs &, always‑true/false tests)
+|-Wduplicated-cond|Warns when an if/else if chain repeats the same condition
+|-Wduplicated-branches|Warns when different branches contain identical code
+|-Wstrict-overflow=5|Warns when the compiler assumes signed overflow is undefined and optimizes based on that (level 5 = most strict)
+|-Woverflow|Warns about compile‑time constant arithmetic that overflows the destination type
+|-Wredundant-decls|Warns when an entity is declared multiple times in the same scope
+|-Wnested-externs|Warns on extern declarations placed inside functions (confusing linkage/style)
+|-Wmissing-noreturn|Warns when a function that never returns should be marked _Noreturn
+|-Wmissing-declarations|Warns when a global function is defined without a prior prototype in a header
+|-Winline|Warns when a function marked/expected to inline is not inlined (e.g., too large/complex)
+|=================

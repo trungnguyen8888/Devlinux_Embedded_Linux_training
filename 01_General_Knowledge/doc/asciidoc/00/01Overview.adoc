@@ -1,0 +1,54 @@
+:chapter_num: 1
+:image_num: 0
+:table_num: 0
+:icons: font
+
+[[Chapter_1]]
+== Overview
+
+[[Chapter_1-1]]
+=== Introduction
+
+This document provides information regarding the General Knowledge lesson.
+
+[[Chapter_1-2]]
+=== References
+
+[title=": References", caption="Table {chapter_num}-{counter:table_num}", id=table_1-1, cols="1,4,6", align=center]
+|=================
+|No.|Documents|Description
+
+|1|https://drive.google.com/file/d/1Sr9LuaJfU4-ZXU_rAmdS-GtVIj9dxXwT/view[01_General_Knowledge.pdf]|The lesson lecture
+|=================
+
+[[Chapter_1-3]]
+=== Environment
+
+[title=": Environment", caption="Table {chapter_num}-{counter:table_num}", id=table_1-2, cols="1,1,1", align=center]
+|=================
+|Type|Component|Information
+
+|OS|Ubuntu|22.04.5 LTS
+|Kernel|Linux kernel|6.8.0-65-generic
+|GNU C Compiler|GCC|11.4.0
+|Build operation tool|GNU Make|4.3
+|=================
+
+[[Chapter_1-4]]
+=== Folder structure
+
+Below is the folder tree.
+
+image::Tree.png[id=figure_{chapter_num}-{counter:image_num},align=center]
+[.text-center]
+_Figure {chapter_num}-{counter:image_num}: Folder tree_
+
+[[Chapter_1-5]]
+=== Glossary
+
+[title=": Glossary", caption="Table {chapter_num}-{counter:table_num}", id=table_1-3, cols="1,6", align=center]
+|=================
+|Abbr.|Description
+
+|ELF|Executable and Linkable Format
+|=================

@@ -1,0 +1,21 @@
+:chapter_num: 5
+:image_num: 0
+:table_num: 0
+:icons: font
+
+[[Chapter_5]]
+== Revision history
+
+[id=table_5-1, options="header", cols="1,2,2,5"]
+|=================
+|Version|Date|Chapter|Content
+
+.1+|0.01 .1+|Aug 23rd, 2025
+|All|Newly created
+.2+|0.02 .2+|Aug 24th, 2025
+|<<Chapter_2-3-1-5, Chapter 2.4.1.5>>|Create a new chapter that provides guidance on running the application
+|<<Chapter_2-3-1-4, Chapter 2.4.1.4>>|Add note about library priority
+.2+|0.03 .2+|Sep 3rd, 2025
+|<<Chapter_4, Chapter 4>>|Create a new chapter for the solutions to exercises
+|<<Chapter_2, Chapter 2>>|Remove C compilation flags
+|=================

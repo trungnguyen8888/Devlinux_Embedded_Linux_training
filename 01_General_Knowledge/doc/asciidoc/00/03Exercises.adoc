@@ -1,0 +1,69 @@
+:chapter_num: 3
+:image_num: 0
+:table_num: 0
+:icons: font
+
+[[Chapter_3]]
+== Exercise
+
+Building and Using static & shared libraries in C.
+
+In C programming, as a project grows, organizing source code into reusable modules is crucial. A library lets us package a set of related functions to share across multiple projects without copying source code.
+
+Static library ([.font-courier]#.a#): The library’s code is copied and embedded directly into your executable at compile time. The executable is larger but runs independently.
+
+Shared library ([.font-courier]#.so# — Shared Object): The library’s code is not embedded into the executable. Instead, the OS loads the library into memory at runtime, and multiple programs can share it.
+
+[[Chapter_3-1]]
+=== Exercise 1
+
+Build a String Utilities Library ([.font-courier]#strutils#).
+
+==== Source layout
+
+* [.font-courier]#strutils.h#: Declares the functions provided by the library, for example:
+** [.font-courier]#str_reverse#: Reverses a string in place.
+** [.font-courier]#str_trim#: Removes leading and trailing whitespace from a string.
+** [.font-courier]#str_to_int#: Safely converts a string to an integer.
+* [.font-courier]#bstrutils.c#: Source implementing the functions declared in [.font-courier]#strutils.h#.
+* [.font-courier]#main.c#: A small program to test the [.font-courier]#strutils# library functions.
+
+==== Package the library
+
+* Build a static library: [.font-courier]#libstrutils.a#.
+* Build a shared library: [.font-courier]#libstrutils.so#.
+
+==== Use the library
+
+Write a main program to test the [.font-courier]#strutils# functions. Compile and link:
+
+* With static library:
+
+[source, subs=+attributes]
+----
+gcc main.c -L. -lstrutils -o main_static
+----
+
+* With shared library:
+
+[source, subs=+attributes]
+----
+gcc main.c -L. -lstrutils -o main_shared
+----
+
+[NOTE]
+====
+To execute main_shared, you must tell the OS where to find the [.font-courier]#.so# file (hint: use the [.font-courier]#LD_LIBRARY_PATH# environment variable).
+====
+
+[[Chapter_3-2]]
+=== Exercise 2
+
+Automate with a [.font-courier]#Makefile#.
+
+Create a [.font-courier]#Makefile# to automate all steps above, including these targets:
+
+* [.font-courier]#all#: Default target; builds both [.font-courier]#main_static# and [.font-courier]#main_shared#.
+* [.font-courier]#static#: Builds only [.font-courier]#libstrutils.a# and [.font-courier]#main_static#.
+* [.font-courier]#shared#: Builds only [.font-courier]#libstrutils.so# and [.font-courier]#main_shared#.
+* [.font-courier]#clean#: Removes all build artifacts ([.font-courier]#.o#, [.font-courier]#.a#, [.font-courier]#.so#, and executables).
